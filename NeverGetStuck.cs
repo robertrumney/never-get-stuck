@@ -32,7 +32,7 @@ public class NeverGetStuck : MonoBehaviour
         if (rb.velocity.magnitude < velocityThreshold && input != Vector2.zero)
         {
             // The player is stuck, so move the player slightly in a random direction
-            rb.MovePosition(rb.position + Random.insideUnitSphere * 0.5f);
+            rb.MovePosition(rb.position + Random.insideUnitSphere * 0.2f);
         }
     }
 }
