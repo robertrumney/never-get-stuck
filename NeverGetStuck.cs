@@ -15,7 +15,7 @@ public class NeverGetStuck : MonoBehaviour
     private float stuckTime = 0f;
 
     // Number of seconds before player is considered stuck
-    private const float stuckThreshold = 1f; 
+    private const float stuckThreshold = 0.5f; 
 
     private void Awake()
     {
@@ -47,7 +47,7 @@ public class NeverGetStuck : MonoBehaviour
             if (stuckTime >= stuckThreshold)
             {
                 // The player has been stuck for over 1 second, so move the player slightly in a random direction
-                rb.MovePosition(rb.position + Random.insideUnitSphere * 0.2f);
+                rb.MovePosition(rb.position + Random.insideUnitSphere * 0.5f);
 
                 // Reset the stuck time
                 stuckTime = 0f; 
