@@ -8,31 +8,55 @@ public class NeverGetStuck : MonoBehaviour
     // The player's input
     private Vector2 input;
 
-    void Start()
+    //The player input script
+    private FPSRigidBodyWalker walker;
+
+    // Number of seconds player is stationary
+    private float stuckTime = 0f;
+
+    // Number of seconds before player is considered stuck
+    private const float stuckThreshold = 1f; 
+
+    private void Awake()
     {
-        // Get the player's rigidbody
+        // Get the player's rigidbody and collider
         rb = GetComponent<Rigidbody>();
+        walker = GetComponent<FPSRigidBodyWalker>();
     }
 
-    void Update()
+    private void Update()
     {
-        // Get the player's input from the horizontal and vertical axis
-        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        // Get the player's input
+        input = new Vector2(walker.inputX, walker.inputY);
 
         // Check if the player is stuck
         CheckIfStuck();
     }
 
-    // Check if the player is stuck by comparing the player's velocity to their input
-    void CheckIfStuck()
+    private void CheckIfStuck()
     {
-        float velocityThreshold = 0.3f; // Adjust this value to suit your needs
+        // Adjust this value to suit your needs
+        float velocityThreshold = 0.3f; 
 
         // If the player is trying to move and their velocity is near zero, they are stuck
         if (rb.velocity.magnitude < velocityThreshold && input != Vector2.zero)
         {
-            // The player is stuck, so move the player slightly in a random direction
-            rb.MovePosition(rb.position + Random.insideUnitSphere * 0.2f);
+            // Increment the stuck time
+            stuckTime += Time.deltaTime; 
+
+            if (stuckTime >= stuckThreshold)
+            {
+                // The player has been stuck for over 1 second, so move the player slightly in a random direction
+                rb.MovePosition(rb.position + Random.insideUnitSphere * 0.2f);
+
+                // Reset the stuck time
+                stuckTime = 0f; 
+            }
+        }
+        else
+        {
+            // Reset the stuck time if the player is not stuck
+            stuckTime = 0f; 
         }
     }
 }
