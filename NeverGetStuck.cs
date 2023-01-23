@@ -7,10 +7,7 @@ public class NeverGetStuck : MonoBehaviour
 
     // The player's input
     private Vector2 input;
-
-    //The player input script
-    private FPSRigidBodyWalker walker;
-
+    
     // Number of seconds player is stationary
     private float stuckTime = 0f;
 
@@ -26,8 +23,8 @@ public class NeverGetStuck : MonoBehaviour
 
     private void Update()
     {
-        // Get the player's input
-        input = new Vector2(walker.inputX, walker.inputY);
+        // Get the player's input from the horizontal and vertical axis
+        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         // Check if the player is stuck
         CheckIfStuck();
