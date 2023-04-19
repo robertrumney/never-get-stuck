@@ -12,7 +12,7 @@ public class NeverGetStuck : MonoBehaviour
     private float stuckTime = 0f;
 
     // Number of seconds before player is considered stuck
-    private const float stuckThreshold = 0.5f; 
+    private const float stuckThreshold = 1.0f; 
 
     private void Awake()
     {
