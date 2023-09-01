@@ -14,6 +14,9 @@ public class NeverGetStuck : MonoBehaviour
     // Number of seconds before player is considered stuck
     private const float stuckThreshold = 1.0f; 
 
+    // Adjust this value to suit your needs
+    readonly float velocityThreshold = 0.3f; 
+
     private void Awake()
     {
         // Get the player's rigidbody and collider
@@ -24,17 +27,9 @@ public class NeverGetStuck : MonoBehaviour
     private void Update()
     {
         // Get the player's input from the horizontal and vertical axis
-        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-        // Check if the player is stuck
-        CheckIfStuck();
-    }
-
-    private void CheckIfStuck()
-    {
-        // Adjust this value to suit your needs
-        float velocityThreshold = 0.3f; 
-
+        input.x = Input.GetAxis("Horizontal");
+        input.y = Input.GetAxis("Vertical");
+    
         // If the player is trying to move and their velocity is near zero, they are stuck
         if (rb.velocity.magnitude < velocityThreshold && input != Vector2.zero)
         {
