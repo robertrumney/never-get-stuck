@@ -29,10 +29,6 @@ If the script is not functioning as expected, here are some potential issues to 
 - Make sure that the input axis specified in the script match the input axis that are configured in the Unity Input Manager.
 - Try adjusting the `velocityThreshold` variable to see if that resolves the issue.
 
-## Credits
-
-This script was developed by Robert Rumney.
-
 ## License
 
 This script is released under the public domain license. You are free to use it as you wish.
